@@ -21,7 +21,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Status</label>
-                                        <select class="form-control select" id="selectStatus">
+                                        <select class="form-control select" name="selectStatus">
                                             <option>open</option>
                                             <option>closed</option>
                                         </select>
@@ -30,7 +30,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Creation Date</label>
-                                        <input type="date" class="form-control" id="creationDate" placeholder="Date" disabled="disabled">
+                                        <input type="date" class="form-control" name="creationDate"  disabled="disabled" value={{creationDate}}>
                                     </div>
                                 </div>
                             </div>
@@ -39,15 +39,17 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Author</label>
-                                        <input type="text" class="form-control" placeholder="Author" name="author" disabled="disabled">
+                                        <input type="text" class="form-control" name="author" value={{loggedUser.email}}>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Assignee</label>
-                                        <select class="form-control select" id="selectAssignee">
-                                            <option>Assignee 1 </option>
-                                            <option>Assignee 2 </option>
+                                        <select class="form-control select" name="selectAssignee">
+                                            <option selected>{{loggedUser.email}}</option>
+                                            {{#each userOptions}}
+                                                    <option value = {{this.email}}>{{this.email}}</option>
+                                            {{/each}}
                                         </select>
                                     </div>
                                 </div>

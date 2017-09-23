@@ -17,13 +17,13 @@ var TicketSchema = mongoose.Schema({
         enum: ["open", "closed"],
     },
     author: {
-        type:Schema.ObjectId,
-        ref: 'User',
+        type: Schema.Types.Mixed,
+
         required:true
     },
     assignee: {
-        type:Schema.ObjectId,
-        ref: 'User',
+        type: Schema.Types.Mixed,
+
         required:true
     },
     created: {

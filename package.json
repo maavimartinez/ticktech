@@ -8,10 +8,12 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "async": "^2.5.0",
     "bcryptjs": "*",
     "body-parser": "*",
     "connect-flash": "*",
     "cookie-parser": "~1.4.3",
+    "dateformat": "^3.0.2",
     "debug": "~2.6.3",
     "express": "*",
     "express-handlebars": "*",
