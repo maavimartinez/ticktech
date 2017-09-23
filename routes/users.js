@@ -33,21 +33,28 @@ router.post('/register', function(req, res){
             errors:errors
         });
     } else {
-        var newUser = new User({
-            name: name,
-            email: email,
-            password: password
-        });
-
-        User.createUser(newUser, function(err, user){
-            if(err) throw err;
-            console.log(user);
-        });
-
-        req.flash('success_msg', 'You are registered and can now login');
-
-        res.redirect('/users/login');
+        User.findOne({ 'email': req.body.email})
+            .exec( function(err, found_email) {
+                console.log('found_email: ' + found_email);
+                if (err) { return next(err); }
+                if (found_email) {
+                    req.flash('error_msg', 'Email already used');
+                    res.redirect('/users/register');
+                }
+                else {
+                    var newUser = new User({
+                        name: name,
+                        email: email,
+                        password: password
+                    });
+                    User.createUser(newUser, function (err,user) {
+                        if (err) throw err;
+                    });
+                    req.flash('success_msg', 'Register Successful');
+                }
+            });
     }
+    res.redirect('/users/login');
 });
 
 passport.use(new LocalStrategy({usernameField:'email'},
@@ -82,7 +89,7 @@ passport.deserializeUser(function (id, done) {
 
 router.post('/login',
     passport.authenticate('local', {
-        successRedirect: '/',
+        successRedirect: '/dashboard/dashboardhome',
         failureRedirect: '/users/login',
         failureFlash: true})
 );
