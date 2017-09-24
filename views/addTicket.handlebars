@@ -30,7 +30,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Creation Date</label>
-                                        <input type="date" class="form-control" name="creationDate"  disabled="disabled" value={{creationDate}}>
+                                        <input type="date" class="form-control" name="creationDate" value={{creationDate}} readonly>
                                     </div>
                                 </div>
                             </div>
@@ -39,7 +39,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Author</label>
-                                        <input type="text" class="form-control" name="author" value={{loggedUser.email}}>
+                                        <input type="text" class="form-control" name="author" value={{loggedUser.email}} readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -48,6 +48,7 @@
                                         <select class="form-control select" name="selectAssignee">
                                             <option selected>{{loggedUser.email}}</option>
                                             {{#each userOptions}}
+
                                                     <option value = {{this.email}}>{{this.email}}</option>
                                             {{/each}}
                                         </select>

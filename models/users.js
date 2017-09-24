@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
 var UserSchema = mongoose.Schema({
+    _id : mongoose.Schema.Types.ObjectId,
     email: {
         type: String,
         required: true,
@@ -14,7 +15,7 @@ var UserSchema = mongoose.Schema({
     name: {
         type: String,
         required: true
-    }
+    },
 });
 
 var User = module.exports = mongoose.model('User', UserSchema);
@@ -30,7 +31,6 @@ module.exports.createUser = function (newUser, callback) {
 
 module.exports.getUserByEMail = function(email, callback){
     var query = {email: email};
-    console.log(query);
     User.findOne(query,callback);
 };
 

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var mongoose = require('mongoose');
 
 var User = require('../models/users');
 
@@ -35,7 +36,6 @@ router.post('/register', function(req, res){
     } else {
         User.findOne({ 'email': req.body.email})
             .exec( function(err, found_email) {
-                console.log('found_email: ' + found_email);
                 if (err) { return next(err); }
                 if (found_email) {
                     req.flash('error_msg', 'Email already used');
@@ -43,11 +43,13 @@ router.post('/register', function(req, res){
                 }
                 else {
                     var newUser = new User({
+                        _id: new mongoose.Types.ObjectId(),
                         name: name,
                         email: email,
                         password: password
                     });
-                    User.createUser(newUser, function (err,user) {
+                    console.log(newUser);
+                    User.createUser(newUser, function (err) {
                         if (err) throw err;
                     });
                     req.flash('success_msg', 'Register Successful');
@@ -96,9 +98,7 @@ router.post('/login',
 
 router.get('/logout', function(req, res){
     req.logout();
-
     req.flash('success_msg', 'You are logged out');
-
     res.redirect('/users/login');
 });
 

@@ -1,41 +1,35 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var User = require('../models/users');
+var dateFormat = require('dateformat');
 
 var TicketSchema = mongoose.Schema({
     title: {
         type: String,
-        required: true,
         index: true
     },
     body: {
         type: String,
-        required: true
     },
     status: {
         type: String,
-        required: true,
         enum: ["open", "closed"],
     },
     author: {
-        type: Schema.Types.Mixed,
-
-        required:true
+        type: Schema.Types.ObjectId,
+        ref: 'User',
     },
     assignee: {
-        type: Schema.Types.Mixed,
-
-        required:true
+        type: Schema.Types.ObjectId,
+        ref: 'User',
     },
     created: {
         type: Date,
-        default: Date.now(),
-        required: true
     }
 });
 
 var Ticket = module.exports = mongoose.model('Ticket', TicketSchema);
 
-module.exports.createTicket = function (newTicket, callback) {
-        newTicket.save(callback);
-};
+
+
 

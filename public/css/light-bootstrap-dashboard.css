@@ -111,6 +111,13 @@ p {
   line-height: 1.5;
 }
 
+li{
+  font-family: "Roboto", sans-serif!important;
+  margin-top:10px;
+  color: rgba(255,214,46,1);
+  font-weight: 200;
+}
+
 h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small, h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small, .h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small {
   color: #9A9A9A;
   font-weight: 300;
@@ -160,15 +167,6 @@ body,
 
 .navbar{
     background-color: rgba(255,255,255,0.2) !important;
-}
-
-.media{
-    margin-top: 70%;
-    transform: scale(0.5, 0.5);
-    -ms-transform: scale(0.5, 0.5);
-    -webkit-transform: scale(0.5, 0.5);
-    margin-left: 0% !important;
-    width: 100%;
 }
 
 a {
@@ -254,13 +252,14 @@ input:focus {
   background-size: cover;
   background-position: center center;
 }
+
 .sidebar .sidebar-wrapper {
   position: relative;
   max-height: none;
   min-height: 100%;
   overflow: hidden;
   width: 260px;
-    margin-top:13%;
+    margin-top:0%;
   z-index: 4;
 }
 .sidebar .sidebar-background {
@@ -1367,6 +1366,7 @@ body > .navbar-collapse[data-color="red"]:after {
   border: 0;
   font-size: 16px;
   border-radius: 0;
+  height: 70px;
 }
 .navbar .navbar-brand {
   font-weight: 400;
@@ -3338,6 +3338,7 @@ body > .navbar-collapse[data-color="red"]:after {
     margin-right: 10px;
   }
 }
+
 @media (min-width: 992px) {
   .table-full-width {
     margin-left: -15px;
@@ -3345,16 +3346,18 @@ body > .navbar-collapse[data-color="red"]:after {
   }
 
   .table-responsive {
-    overflow: visible;
+      overflow: scroll;
+      height: 570px!important;
   }
 }
 @media (max-width: 991px) {
   .table-responsive {
     width: 100%;
     margin-bottom: 15px;
-    overflow-x: scroll;
-    overflow-y: hidden;
+    overflow-y: scroll;
     -ms-overflow-style: -ms-autohiding-scrollbar;
     -webkit-overflow-scrolling: touch;
   }
 }
+
+
