@@ -4150,6 +4150,8 @@ tbody.collapse.show {
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: 0.25rem;
+  height: 3%!important;
+  width: 40%!important;
 }
 
 .alert-heading {
@@ -8232,3 +8234,60 @@ a.text-dark:focus, a.text-dark:hover {
   visibility: hidden !important;
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+.msg {
+  background: #fefefe;
+  color: #666666;
+  font-weight: bold;
+  font-size: small;
+  padding: 12px;
+  padding-left: 16px;
+  border-top: solid 3px #CCCCCC;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  -webkit-box-shadow: 0 10px 10px -5px rgba(0,0,0,.08);
+  -moz-box-shadow: 0 10px 10px -5px rgba(0,0,0,.08);
+  box-shadow: 0 10px 10px -5px rgba(0,0,0,.08);
+}
+.msg-clear {
+  border-color: #fefefe;
+  -webkit-box-shadow: 0 7px 10px -5px rgba(0,0,0,.15);
+  -moz-box-shadow: 0 7px 10px -5px rgba(0,0,0,.15);
+  box-shadow: 0 7px 10px -5px rgba(0,0,0,.15);
+}
+.msg-info {
+  border-color: #b8dbf2;
+}
+.msg-success {
+  border-color: #cef2b8;
+}
+.msg-warning {
+  border-color: rgba(255,165,0,.5);
+}
+.msg-danger {
+  border-color: #ec8282;
+}
+.msg-primary {
+  border-color: #9ca6f1;
+}
+.msg-magick {
+  border-color: #e0b8f2;
+}
+.msg-info-text {
+  color: #39b3d7;
+}
+.msg-success-text {
+  color: #80d651;
+}
+.msg-warning-text {
+  color: #db9e34;
+}
+.msg-danger-text {
+  color: #c9302c;
+}
+.msg-primary-text {
+  color: rgba(47,106,215,.9);
+}
+.msg-magick-text {
+  color: #bb39d7;
+}

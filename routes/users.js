@@ -20,7 +20,6 @@ router.post('/register', function(req, res){
     var password = req.body.password;
     var password2 = req.body.password2;
 
-    // Validation
     req.checkBody('name', 'Name is required').notEmpty();
     req.checkBody('email', 'Email is required').notEmpty();
     req.checkBody('email', 'Email is not valid').isEmail();
@@ -47,7 +46,7 @@ router.post('/register', function(req, res){
                         name: name,
                         email: email,
                         password: password,
-                        pending: true
+                        pending: true,
                     });
                     User.createUser(newUser, function (err) {
                         if (err) throw err;
