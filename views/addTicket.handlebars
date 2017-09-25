@@ -13,7 +13,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Title</label>
-                                        <input type="text" class="form-control" placeholder="Title" name="title" required>
+                                        <input type="text" class="form-control" placeholder="Title" name="title"
+                                               required>
                                     </div>
                                 </div>
                             </div>
@@ -30,7 +31,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Creation Date</label>
-                                        <input type="date" class="form-control" name="creationDate" value={{formatDate creationDate}} readonly>
+                                        <input type="date" class="form-control" name="creationDate"
+                                               value={{formatDate creationDate}} readonly>
                                     </div>
                                 </div>
                             </div>
@@ -39,16 +41,17 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Author</label>
-                                        <input type="text" class="form-control" name="author" value={{loggedUser.email}} readonly>
+                                        <input type="text" class="form-control" name="author"
+                                               value={{loggedUser.email}} readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Assignee</label>
                                         <select class="form-control select" name="selectAssignee">
-                                            <option value = {{loggedUser.email}}>{{loggedUser.email}}</option>
+                                            <option value= {{loggedUser.email}} selected>{{loggedUser.email}}</option>
                                             {{#each userOptions}}
-                                                <option value = {{this.email}}>{{this.email}}</option>
+                                                <option value= {{this.email}}>{{this.email}}</option>
                                             {{/each}}
                                         </select>
                                     </div>
@@ -59,7 +62,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Description</label>
-                                        <textarea rows="5" class="form-control" placeholder="Ticket description" name="body" required></textarea>
+                                        <textarea rows="5" class="form-control" placeholder="Ticket description"
+                                                  name="body" required></textarea>
                                     </div>
                                 </div>
                             </div>

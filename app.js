@@ -14,7 +14,7 @@ var handlebars = require('handlebars');
 var jquery = require('jquery');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://192.168.0.105/data/db');
+mongoose.connect('mongodb://172.29.2.9/data/db');
 var db = mongoose.connection;
 
 var routes = require('./routes/index');

@@ -1,12 +1,11 @@
-
 .form {
     z-index: 1;
-    background: rgba(256,256,256,0);
+    background: rgba(256, 256, 256, 0);
     width: 100%;
-    margin-top: 20% !important;
+    margin-top: 65% !important;
 }
 
-body{
+body {
     background-image: url("../images/registerBackground.jpg") !important;
     height: 100%;
     background-position: center;

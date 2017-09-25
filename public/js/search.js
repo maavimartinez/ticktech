@@ -1,4 +1,3 @@
-
 var column;
 var ticketTable = document.getElementById("ticketsTable");
 var rows = ticketTable.getElementsByTagName("tr");

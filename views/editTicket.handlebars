@@ -49,9 +49,9 @@
                                     <div class="form-group">
                                         <label>Assignee</label>
                                         <select class="form-control select" name="selectAssignee">
-                                            <option value = {{selectedTicket.assignee}}>{{selectedTicket.assignee}}</option>
+                                            <option value= {{selectedTicket.assignee}} selected>{{selectedTicket.assignee}}</option>
                                             {{#each userOptions}}
-                                                <option value = {{this.email}}>{{this.email}}</option>
+                                                <option value= {{this.email}}>{{this.email}}</option>
                                             {{/each}}
                                         </select>
                                     </div>

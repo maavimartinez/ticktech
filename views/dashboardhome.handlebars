@@ -1,21 +1,22 @@
-
 <nav class="navbar">
     <div class="container-fluid">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    Status: <button  class="my-navbar-buttons btn-filter" id="my-search" data-target="all" >all/</button>
-                </li>
-                <li>
-                    <button  class="my-navbar-buttons btn-filter" id="my-search" data-target="open" >open/</button>
-                </li>
-                <li>
-                    <button  class="my-navbar-buttons btn-filter" id="my-search" data-target="closed" >closed</button>
-                </li>
-                <li>
-                    <i class="fa fa-search" ></i>
-                    <input type="text" id="mySearch" class="input-search" placeholder="Search by title.." onkeyup="filterByTitle()">
-                </li>
-            </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                Status:
+                <button class="my-navbar-buttons btn-filter" id="my-search" data-target="all">all/</button>
+            </li>
+            <li>
+                <button class="my-navbar-buttons btn-filter" id="my-search" data-target="open">open/</button>
+            </li>
+            <li>
+                <button class="my-navbar-buttons btn-filter" id="my-search" data-target="closed">closed</button>
+            </li>
+            <li>
+                <i class="fa fa-search"></i>
+                <input type="text" id="mySearch" class="input-search" placeholder="Search by title.."
+                       onkeyup="filterByTitle()">
+            </li>
+        </ul>
     </div>
 </nav>
 <div class="content">
@@ -40,16 +41,20 @@
                             </thead>
                             <tbody id="ticket-container">
                             {{#each ticketsList}}
-                            <tr data-status={{this.status}}>
-                                <td>{{this.status}}</td>
-                                <td>{{formatTitle title}}</td>
-                                <td>{{this.body}}</td>
-                                <td>{{formatDate created}}</td>
-                                <td>{{this.author}}</td>
-                                <td>{{this.assignee}}</td>
-                                <td class="td-icons edit"><a href="/dashboard/editTicket/{{this.title}}" id={{this.title}} ><i class="pe-7s-pen"></i></a></td>
-                                <td class="td-icons delete"><a method="delete" href="/dashboard/deleteTicket/{{this.title}}" id={{this.title}}><i class="pe-7s-trash"></i></a></td>
-                            </tr>
+                                <tr data-status={{this.status}}>
+                                    <td>{{this.status}}</td>
+                                    <td>{{formatTitle title}}</td>
+                                    <td>{{this.body}}</td>
+                                    <td>{{formatDate created}}</td>
+                                    <td>{{this.author}}</td>
+                                    <td>{{this.assignee}}</td>
+                                    <td class="td-icons edit"><a href="/dashboard/editTicket/{{this.title}}"
+                                                                 id={{this.title}}><i class="pe-7s-pen"></i></a></td>
+                                    <td class="td-icons delete"><a method="delete"
+                                                                   href="/dashboard/deleteTicket/{{this.title}}"
+                                                                   id={{this.title}}><i class="pe-7s-trash"></i></a>
+                                    </td>
+                                </tr>
                             {{/each}}
                             </tbody>
                         </table>

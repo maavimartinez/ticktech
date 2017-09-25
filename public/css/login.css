@@ -3,7 +3,7 @@
 .form {
     position: relative;
     z-index: 1;
-    background: rgba(256,256,256,0);
+    background: rgba(256, 256, 256, 0);
     width: 100%;
     margin-top: 75%;
     padding: 45px;
@@ -29,8 +29,8 @@
     text-transform: uppercase;
     outline: 0;
     background: #9bd3d4;
-    border-style:solid;
-    border-color:#9bd3d4;
+    border-style: solid;
+    border-color: #9bd3d4;
     border-width: 3px;
     border-radius: 4px;
     width: 100%;
@@ -44,11 +44,11 @@
     cursor: pointer;
 }
 
-.form button:hover,.form button:active,.form button:focus {
-    background: rgba(256,256,256,0.2);
-    color:#9bd3d4;
-    border-style:solid;
-    border-color:#9bd3d4;
+.form button:hover, .form button:active, .form button:focus {
+    background: rgba(256, 256, 256, 0.2);
+    color: #9bd3d4;
+    border-style: solid;
+    border-color: #9bd3d4;
     border-width: 3px;
 }
 
