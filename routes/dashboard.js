@@ -159,14 +159,14 @@ router.post('/addTicket', function (req, res, next) {
                     ticket.status = status;
                     ticket.body = body;
                     ticket.created = Date.now();
-                    ticket.author = author;
-                    ticket.assignee = assignee;
+                   ticket.author = author;
+                   ticket.assignee = assignee;
                     ticket.save(function (err) {
                         if (err) {
                             return next(err)
                         }
                         Ticket.find()
-                            .exec(function (err, Ticket) {
+                            .exec(function (err, ticket) {
                                 if (err) {
                                     return next(err)
                                 }

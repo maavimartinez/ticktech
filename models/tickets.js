@@ -15,10 +15,10 @@ var TicketSchema = mongoose.Schema({
         enum: ["open", "closed"],
     },
     author: {
-        type: Schema.Types.Mixed
+        type: Schema.Types.Mixed,
     },
     assignee: {
-        type: Schema.Types.Mixed
+        type: Schema.Types.Mixed,
     },
     created: {
         type: Date,

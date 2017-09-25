@@ -93,3 +93,10 @@ img {
 .myPanel {
     margin-top: 4% !important;
 }
+
+#authorize {
+    margin-left: 5%!important;
+    width: 90%!important;
+    padding-left: 6%!important;
+    padding-right: 0%!important;
+}
