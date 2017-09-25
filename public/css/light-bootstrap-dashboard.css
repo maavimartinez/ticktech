@@ -1269,8 +1269,6 @@ body > .navbar-collapse[data-color="red"]:after {
 }
 
 .has-switch > div label {
-  background-color: #FFFFFF;
-  background: white;
   background: -moz-linear-gradient(top, white 0%, #f1f1f2 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, white), color-stop(100%, #f1f1f2));
   background: -webkit-linear-gradient(top, white 0%, #f1f1f2 100%);
@@ -1335,7 +1333,6 @@ body > .navbar-collapse[data-color="red"]:after {
   margin: 1px -13px;
   padding: 0;
   position: relative;
-  transition: all 0.25s ease-out 0s;
   vertical-align: middle;
   width: 22px;
   z-index: 100;

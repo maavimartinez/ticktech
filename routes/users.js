@@ -46,9 +46,9 @@ router.post('/register', function(req, res){
                         _id: new mongoose.Types.ObjectId(),
                         name: name,
                         email: email,
-                        password: password
+                        password: password,
+                        pending: true
                     });
-                    console.log(newUser);
                     User.createUser(newUser, function (err) {
                         if (err) throw err;
                     });
@@ -65,8 +65,11 @@ passport.use(new LocalStrategy({usernameField:'email'},
             if(err){
                 return done(err);
             }
-            if(!User){
+            if(!user){
                 return done(null, false, {message: 'Incorrect username'});
+            }
+            if(user.pending){
+                return done(null, false, {message: 'Pending Authorization'});
             }
             User.comparePassword(password, user.password, function(err, isMatch){
                 if(err) throw err;

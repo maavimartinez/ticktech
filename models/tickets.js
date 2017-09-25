@@ -16,12 +16,10 @@ var TicketSchema = mongoose.Schema({
         enum: ["open", "closed"],
     },
     author: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
+        type: Schema.Types.Mixed
     },
     assignee: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
+        type: Schema.Types.Mixed
     },
     created: {
         type: Date,
@@ -31,5 +29,22 @@ var TicketSchema = mongoose.Schema({
 var Ticket = module.exports = mongoose.model('Ticket', TicketSchema);
 
 
-
+module.exports.formatedTicketList = function () {
+    var list = [];
+    Ticket.find()
+        .sort({title: 'asc'})
+        .exec(function (err, ticketsList) {
+            if (err) { return next(err); }
+            if(ticketsList){
+                for (var i = 0;i<ticketsList.length;i++){
+                    list[i].author = User.findOne({_id: ticketsList[i].author}).exec().email;
+                    list[i].assignee = User.findOne({_id: ticketsList[i].assignee}).exec().email;
+                    list[i].created = ticketsList[i].created;
+                    list[i].body = ticketsList[i].body;
+                    list[i].title = ticketsList[i].title;
+                }
+            }
+            return list;
+        });
+}
 

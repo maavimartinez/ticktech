@@ -9,11 +9,11 @@
 }
 
 #body{
-    width:20%;
+    width:30%;
 }
 
 #created{
-    width:auto;
+    width:15%;
 }
 
 #author{
@@ -32,34 +32,22 @@
     width: 5%;
 }
 
-#statusText{
-    font-family: "Roboto", sans-serif!important;
-    font-size: 15px!important;
-    margin-top: inherit;
-    font-weight: 200!important;
-}
-
 i{
     margin-left: 15px!important;
 }
 
-.myNavBarButtons{
+.my-navbar-buttons{
     font-family: "Roboto", sans-serif;
     height: 10% !important;
     margin-top: 5% !important;
     padding-left: 0!important;
     padding-right:0 !important;
-    text-underline-style: dash!important;
     border-style:none !important;
     background-color: rgba(255,255,255,0)!important;
     color: #FFFFFF;
     font-size: 16px!important;
 }
 
-.navbar-btn:hover{
-    background-color: rgba(0,0,0,0)!important;
-    color: #9bd3d4!important;
-}
 
 .navbar-right{
     margin-right: 5%!important;
@@ -101,4 +89,8 @@ img{
 
 .td-icons.delete{
     color: #EF3B3A!important;
+}
+
+.myPanel{
+    margin-top: 4%!important;
 }

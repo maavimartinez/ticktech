@@ -1,5 +1,5 @@
 var express = require('express');
-var exphbs = require('express-handlebars');
+var handlebars = require('handlebars');
 var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
@@ -29,33 +29,84 @@ router.get('/dashboardHome', function(req, res, next) {
 });
 
 router.get('/addTicket', function(req, res) {
-    User.find({}, 'email')
+    User.find({pending:false}, 'email')
         .sort({email: 'asc'})
         .exec(function (err, listUsers) {
             if (err) { return err; }
-            res.render('addTicket', { layout: 'layoutDashboard', author: req.user.email, userOptions: listUsers, creationDate: dateFormat(Date.now(), "dd-mm-yyyy"), loggedUser: req.user });
+            res.render('addTicket',
+                { layout: 'layoutDashboard',
+                author: req.user.email,
+                userOptions: listUsers,
+                loggedUser: req.user });
         });
+});
+
+router.get('/authorizeAccounts', function (req,res) {
+    User.find({pending:true})
+        .sort({email: 'asc'})
+        .exec(function (err, pendingUsers) {
+            if(err) {return err;}
+            res.render('authorizeAccounts',
+                { layout: 'layoutDashboard',
+                pendingUsers: pendingUsers,
+                loggedUser: req.user });
+        });
+
+});
+
+router.get('/authorizeUser/:id', function(req, res){
+    var email = req.params.id;
+    User.findOne({email: email}, function(err, user){
+        if(err){
+            console.log(err);
+            res.status(500).send();
+        }else{
+            if(!user){
+                res.status(404).send();
+            }else{
+                user.pending = false;
+                user.save(function (err, updatedUser) {
+                    if(err){
+                        console.log(err);
+                        res.status(500).send();
+                    }
+                    res.redirect('/dashboard/authorizeAccounts');
+                });
+            }
+        }
+    })
+});
+
+router.get('/deleteUser/:id', function(req, res){
+    var email = req.params.id;
+    User.findOneAndRemove({email: email}, function (err) {
+        if(err){console.log(err);}
+        res.redirect('/dashboard/authorizeAccounts');
+    });
 });
 
 router.get('/editTicket/:id', function(req, res){
     var title = req.params.id;
     Ticket.findOne({title: title}, function (err, foundTicket) {
         if(err){console.log(err);}
+        User.find({pending:false}, 'email')
+            .sort({email: 'asc'})
+            .exec(function (err, listUsers) {
+                if (err) { return err; }
         res.render('editTicket',
-            {layout: 'layoutDashboard', loggedUser: req.user,
+            {layout: 'layoutDashboard',
+                loggedUser: req.user,
                 selectedTicket: foundTicket,
-                created: dateFormat(foundTicket.created, "dd-mm-yyyy")
+                userOptions: listUsers
+            });
             });
     });
 });
 
 router.get('/deleteTicket/:id', function(req, res){
     var title = req.params.id;
-    console.log(req.params);
-    console.log(title);
     Ticket.findOneAndRemove({title: title}, function (err) {
         if(err){console.log(err);}
-        req.flash('success_msg', 'Ticket deleted');
         res.redirect('/dashboard/dashboardhome');
     });
 });
@@ -64,15 +115,8 @@ router.post('/addTicket', function(req, res, next){
     var title = req.body.title;
     var status = req.body.selectStatus;
     var body = req.body.body;
-    var selectedAuthor = User.findOne({ 'email': req.body.author})
-        .exec( function(err, foundUser) {
-            if (err) { return next(err); }
-        });
-    var selectedAssignee = User.findOne({ 'email': req.body.selectAssignee})
-        .exec( function(err, foundUser) {
-            if (err) { return next(err); }
-        });
-
+    var author = req.body.author;
+    var assignee = req.body.selectAssignee;
     req.checkBody('title', 'Title is required').notEmpty();
     req.checkBody('body', 'A ticket description is required').notEmpty();
 
@@ -83,7 +127,6 @@ router.post('/addTicket', function(req, res, next){
     } else {
         Ticket.findOne({ 'title': req.body.title})
             .exec( function(err, found_title) {
-                console.log('found_title: ' + found_title);
                 if (err) { return err; }
                 if (found_title) {
                     req.flash('error_msg', 'A ticket already exists with that name');
@@ -95,22 +138,23 @@ router.post('/addTicket', function(req, res, next){
                     ticket.status = status;
                     ticket.body = body;
                     ticket.created = Date.now();
-                    ticket.author=  ObjectId(selectedAssignee._id);
-                    ticket.assignee = ObjectId(selectedAssignee._id);
-                    console.log(ticket);
+                    ticket.author=  author;
+                    ticket.assignee = assignee;
                     ticket.save(function (err) {
-                        if (err) { return next(err)};
+                        if (err) {
+                            return next(err)
+                        }
                         Ticket.find()
                             .exec(function (err, Ticket) {
-                                if (err) {return next(err)};
-                                res.json(Ticket);
+                                if (err) {
+                                    return next(err)
+                                }
                             });
                     });
-                    req.flash('success_msg', 'Ticket created');
                     res.redirect('/dashboard/dashboardhome');
                 }
             });
-    };
+    }
 });
 
 router.post('/editTicket/:id', function (req, res, next) {
@@ -130,11 +174,7 @@ router.post('/editTicket/:id', function (req, res, next) {
                     ticket.status = req.body.selectStatus;
                 }
                 if(req.body.selectAssignee){
-                    ticket.assignee = ObjectId(User.findOne({ 'email': req.body.selectAssignee})
-                                                    .exec( function(err) {
-                                                        if (err) { return next(err); }
-                                                    })._id
-                                                );
+                    ticket.assignee = req.body.selectAssignee;
                 }
                 if(req.body.body){
                     ticket.body = req.body.body;
@@ -144,7 +184,6 @@ router.post('/editTicket/:id', function (req, res, next) {
                         console.log(err);
                         res.status(500).send();
                     }else{
-                        req.flash('success_msg', 'Ticket updated successfully');
                         res.redirect('/dashboard/dashboardhome');
                     }
                 })
@@ -152,6 +191,8 @@ router.post('/editTicket/:id', function (req, res, next) {
         }
     })
 });
+
+
 
 
 module.exports = router;

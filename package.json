@@ -21,6 +21,7 @@
     "express-session": "*",
     "express-validator": "*",
     "handlebars": "^4.0.10",
+    "jquery": "^3.2.1",
     "mongodb": "*",
     "mongoose": "*",
     "morgan": "~1.8.1",

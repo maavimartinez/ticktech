@@ -3,17 +3,17 @@
     <div class="container-fluid">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <button  class="myNavBarButtons" id="mySearch" onclick="showAll()" >all/</button>
+                    Status: <button  class="my-navbar-buttons btn-filter" id="my-search" data-target="all" >all/</button>
                 </li>
                 <li>
-                    <button  class="myNavBarButtons" id="mySearch" onclick="filterByOpen()" >open/</button>
+                    <button  class="my-navbar-buttons btn-filter" id="my-search" data-target="open" >open/</button>
                 </li>
                 <li>
-                    <button  class="myNavBarButtons" id="mySearch" onclick="filterByClosed()" >closed</button>
+                    <button  class="my-navbar-buttons btn-filter" id="my-search" data-target="closed" >closed</button>
                 </li>
                 <li>
                     <i class="fa fa-search" ></i>
-                    <input type="text" id="mySearch" class="input-search" placeholder="Search by title.." onkeyup="filterByTitle()" >
+                    <input type="text" id="mySearch" class="input-search" placeholder="Search by title.." onkeyup="filterByTitle()">
                 </li>
             </ul>
     </div>
@@ -27,9 +27,9 @@
                         <h4 class="title">Tickets</h4>
                     </div>
                     <div class="content table-responsive table-full-width">
-                        <table class="table table-hover table-striped" id="ticketsTable">
+                        <table class="table table-hover table-striped table-filter" id="ticketsTable">
                             <thead>
-                            <th id="status">Status</th>
+                            <th id="status"></th>
                             <th id="title">Title</th>
                             <th id="body">Body</th>
                             <th id="created">Created</th>
@@ -38,14 +38,13 @@
                             <th id="edit">Edit</th>
                             <th id="delete">Delete</th>
                             </thead>
-                            <script id="ticket-table-rows" type="text/x-handlebars-template">
-                            <tbody>
+                            <tbody id="ticket-container">
                             {{#each ticketsList}}
-                            <tr>
+                            <tr data-status={{this.status}}>
                                 <td>{{this.status}}</td>
-                                <td>{{this.title}}</td>
+                                <td>{{formatTitle title}}</td>
                                 <td>{{this.body}}</td>
-                                <td>{{this.created}}</td>
+                                <td>{{formatDate created}}</td>
                                 <td>{{this.author}}</td>
                                 <td>{{this.assignee}}</td>
                                 <td class="td-icons edit"><a href="/dashboard/editTicket/{{this.title}}" id={{this.title}} ><i class="pe-7s-pen"></i></a></td>
@@ -53,7 +52,6 @@
                             </tr>
                             {{/each}}
                             </tbody>
-                            </script>
                         </table>
 
                     </div>

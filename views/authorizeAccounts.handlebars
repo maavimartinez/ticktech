@@ -1,0 +1,35 @@
+<div class="content myPanel">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="header">
+                        <h4 class="title">Authorize Accounts</h4>
+                    </div>
+                    <div class="content table-responsive">
+                        <table class="table table-hover table-striped" id="usersTable">
+                            <thead>
+                            <th id="email">name</th>
+                            <th id="name">email</th>
+                            <th id="edit">Authorize</th>
+                            <th id="delete">Delete</th>
+                            </thead>
+                            <tbody id="ticket-container">
+                            {{#each pendingUsers}}
+                                <tr>
+                                    <td>{{this.name}}</td>
+                                    <td>{{this.email}}</td>
+                                    <td class="td-icons authorize"><a href="/dashboard/authorizeUser/{{this.email}}" ><i class="pe-7s-add-user"></i></a></td>
+                                    <td class="td-icons delete"><a method="delete" href="/dashboard/deleteUser/{{this.email}}"><i class="pe-7s-trash"></i></a></td>
+                                </tr>
+                            {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+</div>

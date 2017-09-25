@@ -11,6 +11,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var handlebars = require('handlebars');
+var jquery = require('jquery');
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://192.168.0.105/data/db');
@@ -19,6 +20,7 @@ var db = mongoose.connection;
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var dashboard = require('./routes/dashboard');
+var helpers = require('./helpers/helpers');
 
 // Init App
 var app = express();

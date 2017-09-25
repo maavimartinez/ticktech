@@ -1,11 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
-.login-page {
-    width: 360px;
-    padding: 8% 0 0;
-    margin: auto;
-}
-
 .form {
     position: relative;
     z-index: 1;
@@ -44,7 +38,9 @@
     padding: 12px;
     color: #FFFFFF;
     font-size: 16px;
+    /*noinspection CssInvalidPropertyValue*/
     -webkit-transition: all 0.3 ease;
+    /*noinspection CssInvalidPropertyValue*/
     transition: all 0.3 ease;
     cursor: pointer;
 }
@@ -72,11 +68,6 @@
     content: "";
     display: block;
     clear: both;
-}
-
-.container .info {
-    margin: 50px auto;
-    text-align: center;
 }
 
 .container .info h1 {
