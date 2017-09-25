@@ -1,15 +1,17 @@
 <link rel="stylesheet" type="text/css" href="/css/register.css">
+<script src="/js/jquery-3.2.1.js"></script>
+
 {{#if errors}}
     {{#each errors}}
         <div class="alert alert-danger">{{msg}}</div>
     {{/each}}
 {{/if}}
 <div class="form">
-    <form method="POST" action="/users/register" class="register-form">
-        <input type="text" placeholder="name" name="name" required/>
-        <input type="text" placeholder="email address" name="email" required/>
-        <input type="password" placeholder="password" name="password" required/>
-        <input type="password" placeholder="repeat password" name="password2" required/>
+    <form method="POST" action="/users/register" class="register-form" id="register-form">
+        <input type="text" placeholder="name" id="name" name="name" required/>
+        <input type="text" placeholder="email address" id="email" name="email" required/>
+        <input type="password" placeholder="password" id="password1" name="password" required/>
+        <input type="password" placeholder="repeat password" id="password2" name="password2" required/>
         <button type="submit">register.</button>
         <p class="message">Already registered? <a href="/users/login">Sign In</a></p>
     </form>

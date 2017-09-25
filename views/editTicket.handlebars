@@ -8,13 +8,13 @@
                         <h4 class="title">Edit Ticket</h4>
                     </div>
                     <div class="content">
-                        <form method="post" method="get" action="{{selectedTicket.title}}">
+                        <form method="post" method="get" id="ticket-form" action="{{selectedTicket.title}}">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Title</label>
-                                        <input type="text" class="form-control"
-                                               value={{selectedTicket.body}} placeholder="Title" name="title" required>
+                                        <input type="text" class="form-control" id="ticket-title"
+                                               placeholder="Title" name="title" value={{selectedTicket.title}} required>
                                     </div>
                                 </div>
                             </div>
@@ -22,7 +22,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Status</label>
-                                        <select class="form-control select" name="selectStatus">
+                                        <select class="form-control select" id="ticket-status" name="selectStatus">
                                             <option>open</option>
                                             <option>closed</option>
                                         </select>
@@ -48,7 +48,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Assignee</label>
-                                        <select class="form-control select" name="selectAssignee">
+                                        <select class="form-control select" id="ticket-assignee" name="selectAssignee">
                                             <option value= {{selectedTicket.assignee}} selected>{{selectedTicket.assignee}}</option>
                                             {{#each userOptions}}
                                                 <option value= {{this.email}}>{{this.email}}</option>
@@ -62,7 +62,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Description</label>
-                                        <textarea rows="5" class="form-control" placeholder="Ticket description"
+                                        <textarea rows="5" class="form-control" id="ticket-body" placeholder="Ticket description"
                                                   name="body" required>{{selectedTicket.body}}</textarea>
                                     </div>
                                 </div>

@@ -18,46 +18,28 @@ router.post('/register', function (req, res) {
     var name = req.body.name;
     var email = req.body.email.toLowerCase();
     var password = req.body.password;
-    var password2 = req.body.password2;
-
-    req.checkBody('name', 'Name is required').notEmpty();
-    req.checkBody('email', 'Email is required').notEmpty();
-    req.checkBody('email', 'Email is not valid').isEmail();
-    req.checkBody('password', 'Password is required').notEmpty();
-    req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
-
-    var errors = req.validationErrors();
-
-    if (errors) {
-        res.render('register', {
-            errors: errors
+    User.findOne({ 'email': req.body.email })
+        .exec(function (err, found_email) {
+            if (err) {
+                return next(err);
+            }
+            if (found_email) {
+                req.flash('error_msg', 'Email already used');
+                res.redirect('/users/register');
+            } else {
+                var newUser = new User({
+                    _id: new mongoose.Types.ObjectId(),
+                    name: name,
+                    email: email,
+                    password: password,
+                    pending: true,
+                });
+                User.createUser(newUser, function (err) {
+                    if (err) throw err;
+                    res.redirect('/users/login');
+                });
+            }
         });
-    } else {
-        User.findOne({ 'email': req.body.email })
-            .exec(function (err, found_email) {
-                if (err) {
-                    return next(err);
-                }
-                if (found_email) {
-                    req.flash('error_msg', 'Email already used');
-                    res.redirect('/users/register');
-                }
-                else {
-                    var newUser = new User({
-                        _id: new mongoose.Types.ObjectId(),
-                        name: name,
-                        email: email,
-                        password: password,
-                        pending: true,
-                    });
-                    User.createUser(newUser, function (err) {
-                        if (err) throw err;
-                    });
-                    req.flash('success_msg', 'Register Successful');
-                }
-            });
-    }
-    res.redirect('/users/login');
 });
 
 passport.use(new LocalStrategy({ usernameField: 'email' },
@@ -103,7 +85,6 @@ router.post('/login',
 
 router.get('/logout', function (req, res) {
     req.logout();
-    req.flash('success_msg', 'You are logged out');
     res.redirect('/users/login');
 });
 
