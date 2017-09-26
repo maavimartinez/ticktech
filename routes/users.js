@@ -34,10 +34,16 @@ router.post('/register', function (req, res) {
                     password: password,
                     pending: true,
                 });
-                User.createUser(newUser, function (err) {
-                    if (err) throw err;
-                    res.redirect('/users/login');
+                User.count({}, function( err, count){
+                    if (count == 0){
+                        newUser.pending = false;
+                    }
+                    User.createUser(newUser, function (err) {
+                        if (err) throw err;
+                        res.redirect('/users/login');
+                    });
                 });
+
             }
         });
 });
